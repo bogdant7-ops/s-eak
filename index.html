@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Veloce — Minimalist Product Workspace</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-layout">
+        <!-- Боковая панель -->
+        <aside class="sidebar">
+            <div class="brand">
+                <div class="brand-dot"></div>
+                <span>Veloce</span>
+                <span class="badge">PRO</span>
+            </div>
+
+            <nav class="nav-menu">
+                <button class="nav-item active" data-filter="all">
+                    <span>All Tasks</span>
+                    <span class="count" id="count-all">0</span>
+                </button>
+                <button class="nav-item" data-filter="in-progress">
+                    <span>In Progress</span>
+                    <span class="count" id="count-progress">0</span>
+                </button>
+                <button class="nav-item" data-filter="completed">
+                    <span>Completed</span>
+                    <span class="count" id="count-completed">0</span>
+                </button>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="budget-card">
+                    <span class="budget-label">Monthly Sprint Budget</span>
+                    <div class="budget-value" id="total-budget">$0</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="budget-bar"></div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Основная рабочая область -->
+        <main class="main-content">
+            <header class="topbar">
+                <div>
+                    <h1>Sprint Overview</h1>
+                    <p class="subtitle">Manage active deliverables and track project revenue.</p>
+                </div>
+                <button class="btn-primary" id="open-modal-btn">+ New Deliverable</button>
+            </header>
+
+            <!-- Bento-метрики -->
+            <section class="metrics-grid">
+                <div class="metric-card">
+                    <span class="metric-title">Active Pipeline</span>
+                    <strong class="metric-number" id="metric-pipeline">$0</strong>
+                    <span class="metric-trend positive">Ready for billing</span>
+                </div>
+                <div class="metric-card">
+                    <span class="metric-title">Completion Rate</span>
+                    <strong class="metric-number" id="metric-rate">0%</strong>
+                    <span class="metric-trend">Current sprint efficiency</span>
+                </div>
+                <div class="metric-card">
+                    <span class="metric-title">Avg. Task Value</span>
+                    <strong class="metric-number" id="metric-avg">$0</strong>
+                    <span class="metric-trend">Per client deliverable</span>
+                </div>
+            </section>
+
+            <!-- Поиск и сортировка -->
+            <section class="controls-bar">
+                <input type="text" id="search-input" placeholder="Search tasks by title or tag..." class="search-input">
+                <select id="priority-filter" class="select-input">
+                    <option value="all">All Priorities</option>
+                    <option value="High">High Priority</option>
+                    <option value="Medium">Medium Priority</option>
+                    <option value="Low">Low Priority</option>
+                </select>
+            </section>
+
+            <!-- Список задач -->
+            <section class="task-list" id="task-list">
+                <!-- Генерируется через JS -->
+            </section>
+        </main>
+    </div>
+
+    <!-- Модальное окно добавления задачи -->
+    <div class="modal-overlay" id="modal-overlay">
+        <div class="modal">
+            <div class="modal-header">
+                <h2>Create Deliverable</h2>
+                <button class="close-btn" id="close-modal-btn">&times;</button>
+            </div>
+            <form id="task-form">
+                <div class="form-group">
+                    <label>Task Title</label>
+                    <input type="text" id="task-title" required placeholder="e.g., Landing Page UI Redesign">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Value ($ USD)</label>
+                        <input type="number" id="task-price" required min="10" placeholder="350">
+                    </div>
+                    <div class="form-group">
+                        <label>Priority</label>
+                        <select id="task-priority">
+                            <option value="High">High</option>
+                            <option value="Medium" selected>Medium</option>
+                            <option value="Low">Low</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Category Tag</label>
+                    <input type="text" id="task-tag" required placeholder="Frontend / Design / API">
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn-secondary" id="cancel-btn">Cancel</button>
+                    <button type="submit" class="btn-primary">Add to Workspace</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
